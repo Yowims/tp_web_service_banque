@@ -1,0 +1,392 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "version": "1.0.0",
+        "title": "TP_Banque",
+        "description": "Tp Banque Web Services",
+        "license": 
+        {
+            "name": "ISC",
+            "url": "https://opensource.org/licenses/ISC"
+        }
+    },
+    "servers": 
+    [
+        {
+            "url": "/",
+            "description": "Racine du serveur"
+        },
+        {
+            "url": "/api/",
+            "description": "Racine de l'API"
+        }
+    ],
+    "tags": 
+    [
+        {
+            "name": "API",
+            "description": "Les routes liées à l'API"
+        }
+    ],
+    "consumes": 
+    [
+        "application/json",
+    "multipart/form-data"
+    ],
+    "produces":
+    [
+        "application/json",
+    "text/html"
+    ],
+    "paths": 
+    {
+        "/new_user": 
+        {
+            "post": 
+            {
+                "tags": 
+                [
+                    "API"
+                ],
+                "summary": "Création d'un nouvel utilisateur",
+                "requestBody": 
+                {
+                    "description": "User Object",
+                    "required": true,
+                    "content": 
+                    {
+                        "application/json": 
+                        {
+                            "schema": 
+                            {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    }
+                },
+                "produces": 
+                [
+                    "application/json"
+                ],
+                "responses": 
+                {
+                    "201": 
+                    {
+                        "description": "Created",
+                        "schema": 
+                        {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "500": 
+                    {
+                        "description": "Error => Failed. Bad post data."
+                    }
+                }
+            }
+        },
+        "/jwt": 
+        {
+            "post": 
+            {
+                "tags": 
+                [
+                    "API"
+                ],
+                "summary": "Génération d'un JWT",
+                "requestBody": 
+                {
+                    "description": "User Object",
+                    "required": true,
+                    "content": 
+                    {
+                        "application/json": 
+                        {
+                            "schema": 
+                            {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    }
+                },
+                "produces": 
+                [
+                    "application/json"
+                ],
+                "responses": 
+                {
+                    "200": 
+                    {
+                        "description": "Ok",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "401": 
+                    {
+                        "description": "Error => Email invalide ou Mot de passe invalide"
+                    }
+                }
+            }
+    
+        },
+        "/user/{user_id}":
+        {
+            "get": 
+            {
+                "tags": 
+                [
+                    "API"
+                ],
+                "summary": "Voir le compte de l'utilisateur",
+                "parameters": [
+                  {
+                    "in": "path",
+                    "name": "user_id",
+                    "schema": {
+                      "type": "integer"
+                    },
+                    "required": true,
+                    "description": "ID du compte de l'utilisateur"
+                  }
+                ],
+                "responses": 
+                {
+                    "200": 
+                    {
+                        "description": "Ok",
+                        "schema": 
+                        {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "500": 
+                    {
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/deposit":
+        {
+            "post": 
+            {
+                "tags": 
+                [
+                    "API"
+                ],
+                "summary": "Ajouter de l'argent au solde",
+                "requestBody": 
+                {
+                    "description": "User Object",
+                    "required": true,
+                    "content": 
+                    {
+                        "application/json": 
+                        {
+                            "schema": 
+                            {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    }
+                },
+                "produces": 
+                [
+                    "application/json"
+                ],
+                "responses": 
+                {
+                    "200": 
+                    {
+                        "description": "Ok",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "401": 
+                    {
+                        "description": "Error => Valeur saisie incorrecte"
+                    }
+                }
+            }
+        },
+        "/withdraw":
+        {
+            "post": 
+            {
+                "tags": 
+                [
+                    "API"
+                ],
+                "summary": "Effectuer un retrait sur le solde",
+                "requestBody": 
+                {
+                    "description": "User Object",
+                    "required": true,
+                    "content": 
+                    {
+                        "application/json": 
+                        {
+                            "schema": 
+                            {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    }
+                },
+                "produces": 
+                [
+                    "application/json"
+                ],
+                "responses": 
+                {
+                    "200": 
+                    {
+                        "description": "Ok",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "401": 
+                    {
+                        "description": "Error => Valeur saisie incorrecte"
+                    }
+                }
+            }
+        },
+        "/login":
+		{
+		  "post":
+		  {
+			"tags":
+			[
+			  "API"
+			],
+			"summary": "Connexion",
+			"requestBody":
+			{
+			  "description": "User Object",
+			  "required": true,
+			  "content":
+			  {
+				"application/json":
+				{
+				  "schema":
+				  {
+					"$ref": "#/definitions/User"
+				  }
+				}
+			  }
+			},
+			"produces":
+			[
+			  "text/html"
+			],
+			"responses":
+			{
+			  "200":
+			  {
+				"description": "Ok"
+			  },
+			  "404":
+			  {
+				"description": "Not Found"
+			  }
+			}
+		  }
+		},
+		"/register":
+		{
+		  "post":
+		  {
+			"tags":
+			[
+			  "API"
+			],
+			"summary": "Inscription",
+			"requestBody":
+			{
+			  "description": "User Object",
+			  "required": true,
+			  "content":
+			  {
+				"application/json":
+				{
+				  "schema":
+				  {
+					"$ref": "#/definitions/User"
+				  }
+				}
+			  }
+			},
+			"produces":
+			[
+			  "text/html"
+			],
+			"responses":
+			{
+			  "200":
+			  {
+				"description": "Ok"
+			  },
+			  "404":
+			  {
+				"description": "Not Found"
+			  }
+			}
+		  }
+		}
+	},
+	"definitions": 
+	{
+		"User": 
+		{
+			"type": "object",
+			"properties": 
+			{
+				"id": 
+				{
+					"type": "integer"
+				},
+				"civilite": 
+				{
+					"type": "string"
+				},
+				"prenom":
+				{
+					"type": "string"
+				},
+				"nom": 
+				{
+					"type": "string"
+				},
+				"birth_date": 
+				{
+					"type": "object"
+				},
+				"adresse_postale":
+				{
+					"type": "string"
+				},
+				"login":
+				{
+					"type": "string"
+				},
+				"pin_code":
+				{
+				  "type": "string"
+				},
+				"balance":
+				{
+				  "type": "string"
+				}
+				
+			}
+		}
+	}
+}
